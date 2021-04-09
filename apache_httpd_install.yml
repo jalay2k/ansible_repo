@@ -1,0 +1,23 @@
+---
+  - name: install httpd and apache2 on servers
+    hosts: CENTOS:SERVER1:SERVER2
+    gather_facts: yes
+    become: yes
+    tasks:
+     - name: install apache2
+       apt:
+         name:
+          - apache2
+          - libapache2-mod-php
+         state: latest
+         update_cache: yes
+       when: ansible_os_family ==  "Ubuntu"
+     - name: install httpd
+       yum:
+        name:
+         - httpd
+         - php
+        state: present
+       when: ansible_os_family == "Redhat"      
+      
+
