@@ -1,0 +1,16 @@
+---
+  - name: install unzip
+    hosts: localhost
+    become: yes
+    tasks:
+    - name: unzip
+      package:
+        name: unzip
+    - name: install terraform
+      unarchive:
+       src: https://releases.hashicorp.com/terraform/0.14.10/terraform_0.14.10_linux_amd64.zip
+       dest: /usr/local/bin
+       remote_src: yes
+       owner: root
+       group: root
+       mode: 0755
