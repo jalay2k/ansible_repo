@@ -1,0 +1,22 @@
+---
+-  name: install  software on local Machine
+   hosts: SERVER1:SERVER2
+   gather_facts: yes
+   become: yes
+   vars_prompt:
+    - name: software
+      prompt: Enter_Name
+      private: no
+    - name: required
+      prompt: Enter_State
+      private: no
+   tasks: 
+   - name: download new install/uninstall 
+     apt: 
+      name: "{{software}}"
+      state: "{{required}}"
+   - name: Notify Admin what is going on
+     debug: 
+       msg:
+        - "the name of programme downloaded is {{software}}"  
+        - " the ADmin is aware that it  the {{required}}"
